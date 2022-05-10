@@ -9,5 +9,20 @@ SCOPE
 	- if this is done, there will be no confusion about hoisting
 	- downside: makes it hard to track which variables have been declared in current scope
 - from ECMAScript standard:
-	- "If the variable statement occurs inside a FunctionDeclaration, the variables are defined with function-local scope in that function, as described in section 10.1.3. Otherwise, they are defined with global scope (that is, they are created as members of the global object, as described in section 10.1.3) using property attributes { DontDelete }. Variables are created when the execution scope is entered. A Block does not define a new execution scope. Only Program and FunctionDeclaration produce a new scope. Variables are initialised to undefined when created. A variable with an Initialiser is assigned the value of its AssignmentExpression when the VariableStatement is executed, not when the variable is created." 
-- more from another source: In JavaScript, you cannot pass parameters by reference; that is, if you pass a variable to a function, its value is copied and handed to the function (pass by value). Therefore, the function can't change the variable. If you need to do so, you must wrap the value of the variable (e.g., in an array).
+	- "If the variable statement occurs inside a FunctionDeclaration, the variables are defined
+	 with function-local scope in that function, as described in section 10.1.3. Otherwise, 
+	 they are defined with global scope (that is, they are created as members of the global 
+	 object, as described in section 10.1.3) using property attributes { DontDelete }. 
+	 Variables are created when the execution scope is entered. A Block does not define a 
+	 new execution scope. Only Program and FunctionDeclaration produce a new scope. Variables
+	  are initialised to undefined when created. A variable with an Initialiser is assigned 
+	  the value of its AssignmentExpression when the VariableStatement is executed, not when
+	   the variable is created." 
+- more from another source: In JavaScript, you cannot pass parameters by reference;
+ that is, if you pass a variable to a function, its value is copied and handed to 
+ the function (pass by value). Therefore, the function can't change the variable. 
+ If you need to do so, you must wrap the value of the variable (e.g., in an array).
+ - Operators: can't pass as a parameter, but can as a function (?:when)
+ UNDEFINTED ERROR
+ - The error I was getting was a result of not returning the value from the math functions
+  I called. I was writing add(a,b,) and needed to write return add(a,b). That was it. 
