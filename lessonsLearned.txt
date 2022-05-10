@@ -26,3 +26,5 @@ SCOPE
  UNDEFINTED ERROR
  - The error I was getting was a result of not returning the value from the math functions
   I called. I was writing add(a,b,) and needed to write return add(a,b). That was it. 
+  HTML
+  - flexbox does not have to use divs
