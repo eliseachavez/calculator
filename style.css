@@ -1,0 +1,25 @@
+.calculator {
+    display: flex;
+    background-color: green;
+}
+.keypad {
+    display: flex;   
+    flex: 1;
+    background-color: blue;
+}
+.digits {
+    flex: 1;
+    background-color: mediumaquamarine;
+}
+.operators {
+    flex: 1;
+    background-color: greenyellow;
+}
+.clear {
+    flex: 1;
+    background-color: aquamarine;
+}
+.display {
+    flex: 1;
+    background-color: antiquewhite;
+}
