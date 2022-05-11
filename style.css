@@ -1,25 +1,81 @@
 .calculator {
+    display:flex;
+    flex-direction: column;
+    background-color: red;
+    justify-content: center;
+    align-items: center;
+}
+.display {
     display: flex;
-    background-color: green;
-}
-.keypad {
-    display: flex;   
     flex: 1;
-    background-color: blue;
+    background-color: #86f586;
 }
+.digitGroup {
+    display: flex;
+    flex: 2;
+    background-color: #69cb69;
+    flex-direction: column;
+}
+.opClearEquals {
+    display: flex;
+    flex: 1;
+    background-color: #448344;
+    flex-direction: row;
+}
+
+
+
+.digRow1 {
+    display:flex;
+    flex: 1;
+    background-color: orange;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.digRow2 {
+    display:flex;
+    flex: 1;
+    background-color: #e29200;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.digRow3 {
+    display:flex;
+    flex: 1;
+    background-color: #d58a02;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+
+.operatorGroup {
+    display: flex;
+    flex: 1;
+    background-color: yellow;
+    flex-direction: column;
+    align-items: center;
+
+.clearEquals {
+    display: flex;
+    flex: 1;
+    background-color: #d4d401;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+
 .digits {
-    flex: 1;
-    background-color: mediumaquamarine;
+  flex: 1;  
 }
 .operators {
     flex: 1;
-    background-color: greenyellow;
 }
 .clear {
     flex: 1;
-    background-color: aquamarine;
 }
-.display {
+.equals {
     flex: 1;
-    background-color: antiquewhite;
 }
+
+    

@@ -11,21 +11,42 @@ Do not worry about wiring up the JS just yet.
 There should also be a display for the calculator, go ahead and fill it with some dummy numbers so you can get it looking right.
 Add a “clear” button.-->
         <div class="calculator">
-                <div class="digitGroup"><button type="button" class="digits">1</button></div>
-                <div class="digitGroup"><button type="button" class="digits">2</button></div>
-                <div class="digitGroup"><button type="button" class="digits">3</button></div>
-                <div class="digitGroup"><button type="button" class="digits">4</button></div>
-                <div class="digitGroup"><button type="button" class="digits">5</button></div>
-                <div class="digitGroup"><button type="button" class="digits">6</button></div>
-                <div class="digitGroup"><button type="button" class="digits">7</button></div>
-                <div class="digitGroup"><button type="button" class="digits">8</button></div>
-                <div class="digitGroup"><button type="button" class="digits">9</button></div>
-                <div class="operatorGroup"><button type="button" class="operators">+</button></div>
-                <div class="operatorGroup"><button type="button" class="operators">-</button></div>
-                <div class="operatorGroup"><button type="button" class="operators">*</button></div>
-                <div class="operatorGroup"><button type="button" class="operators">/</button></div>
-                <div class="clearAndEnter"><button type="button" class="clear">Clear</button></div>
-                <div class="clearAndEnter"><button type="button" class="display"></button></div>
+            <div class="display">
+                <p class="displayText">Display</p>
+            </div>
+            <div class="digitGroup">
+                <div class="digRow1">
+                    <button type="button" class="digits">1</button>
+                    <button type="button" class="digits">2</button>
+                    <button type="button" class="digits">3</button>
+                </div>
+                <div class="digRow2">
+                    <button type="button" class="digits">4</button>
+                    <button type="button" class="digits">5</button>
+                    <button type="button" class="digits">6</button>
+                </div>
+                <div class="digRow3">
+                    <button type="button" class="digits">7</button>
+                    <button type="button" class="digits">8</button>
+                    <button type="button" class="digits">9</button>
+                </div>
+            </div>
+            <div class="opClearEquals">
+                <div class="operatorGroup">
+                    <div class="opRow1">
+                        <button type="button" class="operators">+</button>
+                        <button type="button" class="operators">-</button>
+                    </div>
+                    <div class="opRow2">
+                        <button type="button" class="operators">x</button>
+                        <button type="button" class="operators">/</button>
+                    </div>
+                </div>
+                <div class="clearEquals">
+                    <button type="button" class="clear">Clear</button>
+                    <button type="button" class="equals">=</button>
+                </div>
+            </div>
         </div>
     </body>
 
