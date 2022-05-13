@@ -1,0 +1,12 @@
+Lessons Learned
+
+ - Description of the problem: css layers hidden and alignment off
+    Solution: Started at the beginning. Made the parent boxes and didn't
+    move to children boxes until those looked right. And so on.
+    Saved any and all alignment for later. Used padding and margin attributes
+    on children boxes in order to still be able to see the parent layers.
+    Once all these were working, I was able to work with the elements. I simply
+    needed to have working parent boxes first. I can treat the elements
+    exactly like children flex items.
+    Many of my issues also went back to very small errors, like forgetting a
+    semicolon and an end brace.
