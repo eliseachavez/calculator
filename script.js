@@ -78,17 +78,31 @@ var clearEquals = document.querySelector('.clearEquals');
 ////////////////////////////////////////////////////////////
 
 //global variable for storing button input (array so math operations can be changed)
-var numbers = [];
+var operands = []; //takes every digit pressed as an input, e.g. [1,+,2, ]
 var displayValue = '';
 ////////////////////////////////////////////////////////////
 
 // Functions
 function populateDisplay(e) {
+    //populate display with digit pressed
     var currentDisplayText = display.textContent;
     var digitLabel = e.currentTarget.outerText;
     var textOnScreen = currentDisplayText + digitLabel;
     display.textContent = textOnScreen;
     displayDiv.appendChild(display);
+
+    //push the digit label to the operands array
+    operands.push(digitLabel);
+
+    //if the digit is =, this doesn't go the array, rather
+    //it prompts the expression to be evaluated
+    if (e.currentTarget.outerText ==='=') {
+        doTheMath();
+    }
+}
+function doTheMath() {
+//need to take all the numbers from populate display (so maybe is called from populate display)
+alert('nothing here so far');
 }
 
 // Event Listeners per button //////////////////////////////
@@ -106,8 +120,8 @@ addButton.addEventListener('click', populateDisplay);
 subButton.addEventListener('click', populateDisplay);
 multButton.addEventListener('click', populateDisplay);
 divButton.addEventListener('click', populateDisplay);
-
 clearButton.addEventListener('click', () => {
     display.textContent = '';
     displayDiv.appendChild(display);
 });
+equalsButton.addEventListener('click', doTheMath);
