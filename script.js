@@ -41,6 +41,9 @@ maybe start with the event listener as something really simple, like an alert me
 */ 
 
 // Select all the digits and the display
+// The buttons - could also grab as a button nodelist?
+var buttonList = document.querySelectorAll('button'); //nodelist of all buttons
+
 var digit1 = document.querySelector('#digit1');
 var digit2 = document.querySelector('#digit2');
 var digit3 = document.querySelector('#digit3');
@@ -52,13 +55,48 @@ var digit8 = document.querySelector('#digit8');
 var digit9 = document.querySelector('#digit9');
 var clearButton = document.querySelector('.clear');
 var equalsButton = document.querySelector('.equals');
-var display = document.querySelector('.displayText'); //is a paragraph element
 var addButton = document.querySelector('#addButton');
 var subButton = document.querySelector('#subButton');
 var multButton = document.querySelector('#multButton');
 var divButton = document.querySelector('#divButton');
 
-digit1.addEventListener('click', function() { alert('1');} );
+// The display
+var display = document.querySelector('p'); //is a paragraph element
+// All the parent divs
+var container = document.querySelector('.calculator'); 
+var displayDiv = document.querySelector('.display');
+var digitGroup = document.querySelector('.digitGroup');
+var digRow1 = document.querySelector('.digRow1');
+var digRow2 = document.querySelector('.digRow2');
+var digRow3 = document.querySelector('.digRow3');
+var opClearEquals = document.querySelector('.opClearEquals');
+var operatorGroup = document.querySelector('.operatorGroup');
+var opRow1 = document.querySelector('.opRow1');
+var opRow2 = document.querySelector('.opRow2');
+var clearEquals = document.querySelector('.clearEquals');
+
+////////////////////////////////////////////////////////////
+
+//global variable for storing button input (array so math operations can be changed)
+var numbers = [];
+var displayValue = '';
+////////////////////////////////////////////////////////////
+
+// Functions
+function populateDisplay() {
+    display.textContent = '';
+    displayDiv.appendChild(display);
+}
+// Event Listeners per button //////////////////////////////
+
+digit1.addEventListener('click', function() {
+    //first show number in display
+    display.textContent = ' 1 ';
+    displayDiv.appendChild(display);
+});
+//if number of items is more than 2, go ahead and operate on them} );
+
+
 digit2.addEventListener('click', function() { alert('2');} );
 digit3.addEventListener('click', function() { alert('3');} );
 digit4.addEventListener('click', function() { alert('4');} );
@@ -73,11 +111,3 @@ addButton.addEventListener('click', function() { alert('+');} );
 subButton.addEventListener('click', function() { alert('-');} );
 multButton.addEventListener('click', function() { alert('x');} );
 divButton.addEventListener('click', function() { alert('/');} );
-
-
-
-
-
-
-
-
