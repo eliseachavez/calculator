@@ -90,6 +90,7 @@ function populateDisplay(e) {
     display.textContent = textOnScreen;
     displayDiv.appendChild(display);
 }
+
 // Event Listeners per button //////////////////////////////
 
 digit1.addEventListener('click', populateDisplay);
@@ -106,18 +107,7 @@ subButton.addEventListener('click', populateDisplay);
 multButton.addEventListener('click', populateDisplay);
 divButton.addEventListener('click', populateDisplay);
 
-/*
-digit2.addEventListener('click', function() { alert('2');} );
-digit3.addEventListener('click', function() { alert('3');} );
-digit4.addEventListener('click', function() { alert('4');} );
-digit5.addEventListener('click', function() { alert('5');} );
-digit6.addEventListener('click', function() { alert('6');} );
-digit7.addEventListener('click', function() { alert('7');} );
-digit8.addEventListener('click', function() { alert('8');} );
-digit9.addEventListener('click', function() { alert('9');} );
-clearButton.addEventListener('click', function() { alert('clear');} );
-equalsButton.addEventListener('click', function() { alert('equals');} );
-addButton.addEventListener('click', function() { alert('+');} );
-subButton.addEventListener('click', function() { alert('-');} );
-multButton.addEventListener('click', function() { alert('x');} );
-divButton.addEventListener('click', function() { alert('/');} );*/
+clearButton.addEventListener('click', () => {
+    display.textContent = '';
+    displayDiv.appendChild(display);
+});
