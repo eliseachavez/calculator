@@ -83,18 +83,14 @@ var displayValue = '';
 ////////////////////////////////////////////////////////////
 
 // Functions
-function populateDisplay() {
-    display.textContent = '';
+function populateDisplay(e) {
+    var stuff = e.currentTarget.outerText;
+    display.textContent = stuff;
     displayDiv.appendChild(display);
 }
 // Event Listeners per button //////////////////////////////
 
-digit1.addEventListener('click', function() {
-    //first show number in display
-    display.textContent = ' 1 ';
-    displayDiv.appendChild(display);
-});
-//if number of items is more than 2, go ahead and operate on them} );
+digit1.addEventListener('click', populateDisplay);
 
 
 digit2.addEventListener('click', function() { alert('2');} );
