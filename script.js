@@ -1,4 +1,4 @@
-//Create basic math operations: add, subtract, multiply, divide and test in browser
+//MATH FUNCTIONS
 var a = 1;
 var b = 1;
 function add(a,b){
@@ -29,8 +29,17 @@ function operate(op, a,b) {
         return div(a,b);
     }
 }
+///////////////////////////////
 
-console.log(operate('+',a,b));
-console.log(operate('-',a,b));
-console.log(operate('*',a,b));
-console.log(operate('/',a,b));
+/* 
+1. Store all nodes as a variable
+2. Create even listeners for all the buttons
+3. Event listeners pass a number to another function that decides what operations from there
+there may be more than one
+maybe start with the event listener as something really simple, like an alert message
+*/ 
+
+
+
+
+
