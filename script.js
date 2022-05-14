@@ -58,21 +58,21 @@ var subButton = document.querySelector('#subButton');
 var multButton = document.querySelector('#multButton');
 var divButton = document.querySelector('#divButton');
 
-digit1.addEventListener('click', function() { alert('hi');} );
-digit1.addEventListener('click', function() { alert('hi');} );
-digit1.addEventListener('click', function() { alert('hi');} );
-digit1.addEventListener('click', function() { alert('hi');} );
-digit1.addEventListener('click', function() { alert('hi');} );
-digit1.addEventListener('click', function() { alert('hi');} );
-digit1.addEventListener('click', function() { alert('hi');} );
-digit1.addEventListener('click', function() { alert('hi');} );
-digit1.addEventListener('click', function() { alert('hi');} );
-digit1.addEventListener('click', function() { alert('hi');} );
-digit1.addEventListener('click', function() { alert('hi');} );
-digit1.addEventListener('click', function() { alert('hi');} );
-digit1.addEventListener('click', function() { alert('hi');} );
-digit1.addEventListener('click', function() { alert('hi');} );
-digit1.addEventListener('click', function() { alert('hi');} );
+digit1.addEventListener('click', function() { alert('1');} );
+digit2.addEventListener('click', function() { alert('2');} );
+digit3.addEventListener('click', function() { alert('3');} );
+digit4.addEventListener('click', function() { alert('4');} );
+digit5.addEventListener('click', function() { alert('5');} );
+digit6.addEventListener('click', function() { alert('6');} );
+digit7.addEventListener('click', function() { alert('7');} );
+digit8.addEventListener('click', function() { alert('8');} );
+digit9.addEventListener('click', function() { alert('9');} );
+clearButton.addEventListener('click', function() { alert('clear');} );
+equalsButton.addEventListener('click', function() { alert('equals');} );
+addButton.addEventListener('click', function() { alert('+');} );
+subButton.addEventListener('click', function() { alert('-');} );
+multButton.addEventListener('click', function() { alert('x');} );
+divButton.addEventListener('click', function() { alert('/');} );
 
 
 
