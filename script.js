@@ -84,15 +84,18 @@ var displayValue = '';
 
 // Functions
 function populateDisplay(e) {
-    var stuff = e.currentTarget.outerText;
-    display.textContent = stuff;
+    var currentDisplayText = display.textContent;
+    var digitLabel = e.currentTarget.outerText;
+    var textOnScreen = currentDisplayText + digitLabel;
+    display.textContent = textOnScreen;
     displayDiv.appendChild(display);
 }
 // Event Listeners per button //////////////////////////////
 
 digit1.addEventListener('click', populateDisplay);
+digit2.addEventListener('click', populateDisplay);
 
-
+/*
 digit2.addEventListener('click', function() { alert('2');} );
 digit3.addEventListener('click', function() { alert('3');} );
 digit4.addEventListener('click', function() { alert('4');} );
@@ -106,4 +109,4 @@ equalsButton.addEventListener('click', function() { alert('equals');} );
 addButton.addEventListener('click', function() { alert('+');} );
 subButton.addEventListener('click', function() { alert('-');} );
 multButton.addEventListener('click', function() { alert('x');} );
-divButton.addEventListener('click', function() { alert('/');} );
+divButton.addEventListener('click', function() { alert('/');} );*/
