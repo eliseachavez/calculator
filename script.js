@@ -39,8 +39,42 @@ there may be more than one
 maybe start with the event listener as something really simple, like an alert message
 4.Start with just one digit and make an event listener for it. Alert for onclick.
 */ 
+
+// Select all the digits and the display
 var digit1 = document.querySelector('#digit1');
+var digit2 = document.querySelector('#digit2');
+var digit3 = document.querySelector('#digit3');
+var digit4 = document.querySelector('#digit4');
+var digit5 = document.querySelector('#digit5');
+var digit6 = document.querySelector('#digit6');
+var digit7 = document.querySelector('#digit7');
+var digit8 = document.querySelector('#digit8');
+var digit9 = document.querySelector('#digit9');
+var clearButton = document.querySelector('.clear');
+var equalsButton = document.querySelector('.equals');
+var display = document.querySelector('.displayText'); //is a paragraph element
+var addButton = document.querySelector('#addButton');
+var subButton = document.querySelector('#subButton');
+var multButton = document.querySelector('#multButton');
+var divButton = document.querySelector('#divButton');
+
 digit1.addEventListener('click', function() { alert('hi');} );
+digit1.addEventListener('click', function() { alert('hi');} );
+digit1.addEventListener('click', function() { alert('hi');} );
+digit1.addEventListener('click', function() { alert('hi');} );
+digit1.addEventListener('click', function() { alert('hi');} );
+digit1.addEventListener('click', function() { alert('hi');} );
+digit1.addEventListener('click', function() { alert('hi');} );
+digit1.addEventListener('click', function() { alert('hi');} );
+digit1.addEventListener('click', function() { alert('hi');} );
+digit1.addEventListener('click', function() { alert('hi');} );
+digit1.addEventListener('click', function() { alert('hi');} );
+digit1.addEventListener('click', function() { alert('hi');} );
+digit1.addEventListener('click', function() { alert('hi');} );
+digit1.addEventListener('click', function() { alert('hi');} );
+digit1.addEventListener('click', function() { alert('hi');} );
+
+
 
 
 
