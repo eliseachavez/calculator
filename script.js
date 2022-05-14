@@ -94,6 +94,17 @@ function populateDisplay(e) {
 
 digit1.addEventListener('click', populateDisplay);
 digit2.addEventListener('click', populateDisplay);
+digit3.addEventListener('click', populateDisplay);
+digit4.addEventListener('click', populateDisplay);
+digit5.addEventListener('click', populateDisplay);
+digit6.addEventListener('click', populateDisplay);
+digit7.addEventListener('click', populateDisplay);
+digit8.addEventListener('click', populateDisplay);
+digit9.addEventListener('click', populateDisplay);
+addButton.addEventListener('click', populateDisplay);
+subButton.addEventListener('click', populateDisplay);
+multButton.addEventListener('click', populateDisplay);
+divButton.addEventListener('click', populateDisplay);
 
 /*
 digit2.addEventListener('click', function() { alert('2');} );
