@@ -37,8 +37,11 @@ function operate(op, a,b) {
 3. Event listeners pass a number to another function that decides what operations from there
 there may be more than one
 maybe start with the event listener as something really simple, like an alert message
-4.Start with just one digit.
+4.Start with just one digit and make an event listener for it. Alert for onclick.
 */ 
+var digit1 = document.querySelector('#digit1');
+digit1.addEventListener('click', function() { alert('hi');} );
+
 
 
 
