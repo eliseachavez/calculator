@@ -83,6 +83,7 @@ var displayValue = '';
 var result = null;
 var displayResult;
 var opList = ['+','-','x','/'];
+var sum = null;
 ////////////////////////////////////////////////////////////
 
 // Functions
@@ -100,13 +101,19 @@ function populateDisplay(e) {
         evaluate(operands);
     }
 }
-function evaluation(arr) {
-    var arrOperands = arr;
-    //need everything to be a string
-    for (stringNum in arr) {
-        stringNum = Number(stringNum);
-    }
+//TO DO
+function evaluate(arr) {
+    var scrapeResult = scrapeNums(arr);
+
+
 }
+function scrapeNums(arr) {
+    //if a number, parse until an operator is received. convert to number
+    //if an operator, parse only that one.
+    //delete what was parsed from the array and return what was scraped
+    //so only a single value returned.
+}
+
 // Event Listeners per button //////////////////////////////
 
 digit1.addEventListener('click', populateDisplay);

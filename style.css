@@ -2,10 +2,12 @@
     display:flex;
     flex-direction: column;
     background-color: #6a40f5;
-    height: 95vh;
-    width: 25vw;
-     border-radius: 5%;
+    height: 75vh;
+    width: 40vw;
+    border-radius: 5%;
     box-shadow: 5px 10px #3508bd;
+    margin: 10px;
+    padding: 3px;
 }
 .display {
     display: flex;
@@ -13,8 +15,8 @@
     background-color: #e9e2fe;
     justify-content: space-around;
     align-items: center;
-    padding: 3px;
-    margin: 20px;
+    padding: px;
+    margin: 10px;
     border-radius: 10%;
     border: 2px solid #f5ffaf;
     
@@ -26,7 +28,7 @@
     flex-direction: column;
     justify-content: space-around;
     padding: 3px;
-    margin: 3px;
+    margin: 1px;
 }
 .opClearEquals {
     display: flex;
@@ -35,8 +37,8 @@
     flex-direction: column;
     justify-content: center;
     padding: 3px;
-    margin: 3px;
-     border-radius: 10%;
+    margin: 1px;
+    border-radius: 10%;
 }
 
 
@@ -47,8 +49,8 @@
     background-color: #6a40f5;
     flex-direction: row;
     justify-content: space-around;
-    margin: 2px;
-    padding: 2px;
+    margin: 1px;
+    padding: 3px;
     
 }
 .digRow2 {
@@ -57,8 +59,8 @@
     background-color: #6a40f5;
     flex-direction: row;
     justify-content: space-around;
-    margin:2px;
-    padding: 2px;
+    margin:1px;
+    padding: 3px;
 }
 .digRow3 {
     display:flex;
@@ -66,8 +68,8 @@
     background-color: #6a40f5;
     flex-direction: row;
     justify-content: space-around;
-    margin:2px;
-    padding: 2px;
+    margin:1px;
+    padding: 3px;
 }
 
 .operatorGroup {
@@ -76,8 +78,8 @@
     background-color: #6a40f5;
     flex-direction: column;
     justify-content: space-around;
-    margin: 2px;
-    padding: 2px;
+    margin: 1px;
+    padding: 3px;
     /*gap: 2px;
     width: 14vw;
     height: 14vh;*/
@@ -90,8 +92,8 @@
     flex-direction: row;
     justify-content: space-around;
     /*align-items: space-around;*/
-    margin: 2px;
-    padding: 2px;
+    margin: 1px;
+    padding: 3px;
     /*width: 14vw;
     height: 14vh;*/
 }
@@ -103,6 +105,8 @@
     background-color: #6a40f5;
     flex-direction: row;
     justify-content: space-around;
+    margin: 1px;
+    padding: 3px;
 } 
 .opRow2 {
     display: flex;
@@ -110,47 +114,54 @@
     background-color: #6a40f5;
     flex-direction: row;
     justify-content: space-around;
+    margin: 1px;
+    padding: 3px;
 }
 
 /*children at very bottom of hierarchy 
 don't need alignment because they don't have children?*/
 .digits {
     flex: 1;
-    margin: 2px;
+    margin: 3px;
     padding: 2px;
     background-color: #bcc5fb;
     border-radius: 15%;
     border: 2px solid #95ff99;
+    font-size: xx-large;
 }
 
 .operators {
     flex: 1;
-    margin: 2px;
+    margin: 3px;
     padding: 2px;
     background-color: #cbbcfb;
     border-radius: 15%;
     border: 2px solid #ffdaaf;
+    font-size: xx-large;
 }
 .clear {
     flex: 1;
-    margin: 2px;
+    margin: 3x;
     padding: 2px;
     background-color:#a2afff;
     border-radius: 15%;
     border: 2px solid #f5ffaf;
+    font-size: xx-large;
 }
 .equals {
     flex: 1;
-    margin: 2px;
+    margin: 3px;
     padding: 2px;
     background-color: #a2afff;
     border-radius: 15%;
     border: 2px solid #f5ffaf;
+    font-size: xx-large;
 }
 .displayText {
     flex: 1;
     margin: 2px;
     padding: 2px;
+    font-size: xx-large;
     /*background: white; commented out because this would apply
     to a child item, not current item*/
 }
