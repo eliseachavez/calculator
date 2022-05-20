@@ -104,15 +104,61 @@ function populateDisplay(e) {
 //TO DO
 function evaluate(arr) {
     var scrapeResult = scrapeNums(arr);
-
-
+    return scrapeResult;
+    //is there more to evaluate in arr? then keep calling scrapeResult
+    var len = arr.length;
 }
 function scrapeNums(arr) {
-    //if a number, parse until an operator is received. convert to number
+    //TO DO: need to handle edge case of something like 2+=!!
+    var numArr = [];
+    var opList = ['+', '-', 'x', '/'];
+    var len = arr.length;
+    var sum = null;
+    //if a number, parse until an operator is received. convert to number. then consolidate array if multiple numbers
     //if an operator, parse only that one.
     //delete what was parsed from the array and return what was scraped
     //so only a single value returned.
-}
+    //check if it starts with an operator!
+    if (opList.includes(arr[0])) { //if the expression starts with an operator
+        alert('Error, cannot start expression with operator');
+        //1 check for num, and keep going until you hit an operator
+    } else {  
+        for (let i = 0; i < len-1;) {
+            console.log(Number(arr[i]));//if (arr[i] != '=') { //not needed because it shouldn't pass the first if statement above
+            if (Number(arr[i])) { //if the element is a number
+                numArr.push(Number(arr[i]));
+                arr.shift();
+            } else if (opList.includes(arr[i])) { //it's an operator  (or equals?)
+                switch(arr[i]) {
+                case "+":
+                    arr.shift();
+                    sum = add(numArr, arr); //arr passes the remainder of the array to operate on
+                    //return scrapeResult(sum, arr); //keep going until the = is reached
+                case "-":
+                    arr.shift();
+                    i++;
+                    return sub(numArr, arr);
+                case "x":
+                    arr.shift();
+                    return mult(numArr, arr)
+                case "/":
+                    arr.shift();
+                    return div(numArr, arr);
+                 //but need to call apropriate operation first
+                //arr[i] which operator it is
+                /*if add (pop from array) return add(numArr,)
+                if sub return sub(numArr,)
+                if mult return mult(numArr, )
+                if div return div(numArr, )*/
+                }
+            } else {
+                    //the character is = and we're done
+                    return sum;
+                }
+            }
+        }
+    return sum;        //}
+    }
 
 // Event Listeners per button //////////////////////////////
 
