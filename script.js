@@ -2,6 +2,9 @@
 var a = 1;
 var b = 1;
 var c = [];
+var operands = []; //takes every digit pressed as an input, e.g. [1,+,2, ]
+var opList = ['+','-','x','/'];
+var sum = null;
 function add(a,b) {
     //array -> string -> number to do the math!
     
@@ -22,15 +25,7 @@ function add(a,b) {
             break;
         }
     }
-    /*//3. Now iterate through c so you're only adding the next number chunk, not any after that
-    //we want ONLY what will be our second operand
-    for (let i = 0; i < c.length; i++) {
-        if (opList.includes(c[i])) { //if it IS an operator
-            c.splice(0, i); //then need to delete from this index all the way to the end
-            //but then it needs to stop here, because we do want the rest of the array!
-            break;
-        }
-    }*/
+    
     //turn the arrays into strings
     a = a.join("");
     c = c.join("");
@@ -110,12 +105,6 @@ var opRow1 = document.querySelector('.opRow1');
 var opRow2 = document.querySelector('.opRow2');
 var clearEquals = document.querySelector('.clearEquals');
 
-////////////////////////////////////////////////////////////
-
-//global variable for storing button input (array so math operations can be changed)
-var operands = []; //takes every digit pressed as an input, e.g. [1,+,2, ]
-var opList = ['+','-','x','/'];
-var sum = null;
 ////////////////////////////////////////////////////////////
 
 // Functions
