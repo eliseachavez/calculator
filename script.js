@@ -18,14 +18,16 @@ function add(a,b) {
     }
     //2.Now for b, take off the second operand that will be added in this fxn
     //we want the REST of the array
+    console.log(b[0]);
     for (let i = 0; i < b.length; i++) {
-        if (!opList.includes(b[i])) { //if its NOT an operator
-            b.shift();   //then pop off numbers until you DO reach an operator
-        } else { //once operator encountered, stop removing
+        let isOperator = opList.includes(b[0]);
+        if (isOperator) {
             break;
+        } else {
+            b.shift();   //then pop off numbers until you DO reach an operator
         }
     }
-    
+
     //turn the arrays into strings
     a = a.join("");
     c = c.join("");
