@@ -128,7 +128,7 @@ function populateDisplay(e) {
     }
 }
 
-function evaluate(arr) {
+function evaluate(sum, arr) {
     var numArr = [];
     var len = arr.length;
     let i = 0;
