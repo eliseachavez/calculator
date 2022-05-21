@@ -10,8 +10,8 @@ function add(a,b) {
     a = a.join("");
     c = c.join("");
     //now they need to be numbers!
-    //a = Number(a);
-    //c = Number(c);
+    a = Number(a);
+    c = Number(c);
     return a + c;
 }
 
@@ -89,9 +89,6 @@ var clearEquals = document.querySelector('.clearEquals');
 
 //global variable for storing button input (array so math operations can be changed)
 var operands = []; //takes every digit pressed as an input, e.g. [1,+,2, ]
-var displayValue = '';
-var result = null;
-var displayResult;
 var opList = ['+','-','x','/'];
 var sum = null;
 ////////////////////////////////////////////////////////////
@@ -162,7 +159,7 @@ function evaluate(arr) {
                 }
             }
         }
-    return sum;        //}
+    return sum;
 }
 
 // Event Listeners per button //////////////////////////////
@@ -183,5 +180,8 @@ divButton.addEventListener('click', populateDisplay);
 clearButton.addEventListener('click', () => {
     display.textContent = '';
     displayDiv.appendChild(display);
+    //clear the relevant global variables
+    operands.length = 0; //clears array
+    sum = null;
 });
 equalsButton.addEventListener('click', populateDisplay);
