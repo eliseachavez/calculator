@@ -1,8 +1,18 @@
 //MATH FUNCTIONS
 var a = 1;
 var b = 1;
-function add(a,b){
-    return a + b;
+var c = null;
+function add(a,b) {
+    //array -> string -> number to do the math!
+    //pop off the equals from the remaining array
+    c = b.map((x) => x); //this copies the array "b" (gives it argument x and return argument x)
+    c.pop(); //don't want to modify the existing array; needs equals to know when expression is done
+    a = a.join("");
+    c = c.join("");
+    //now they need to be numbers!
+    //a = Number(a);
+    //c = Number(c);
+    return a + c;
 }
 
 function sub(a,b) {
@@ -17,7 +27,7 @@ function div(a,b) {
     return a / b;
 }
 
-function operate(op, a,b) {
+/*function operate(op, a,b) {
 // don't need input validation if user restricted to what's on the buttons
     if ( op === '+') {
         return add(a,b);
@@ -28,7 +38,7 @@ function operate(op, a,b) {
     } else if ( op === '/') {
         return div(a,b);
     }
-}
+}*/
 ///////////////////////////////
 
 /* 
@@ -96,34 +106,29 @@ function populateDisplay(e) {
     displayDiv.appendChild(display);
     //////////////////////////////////
     operands.push(digitLabel);
-
     if (digitLabel === '=') {
-        evaluate(operands);
+        var newDisplayText = evaluate(operands);
+        //clear screen and put sum there
+        display.textContent = '';
+        display.textContent = newDisplayText;
+        displayDiv.appendChild(display);
     }
 }
-//TO DO
+
 function evaluate(arr) {
-    var scrapeResult = scrapeNums(arr);
-    return scrapeResult;
-    //is there more to evaluate in arr? then keep calling scrapeResult
-    var len = arr.length;
-}
-function scrapeNums(arr) {
-    //TO DO: need to handle edge case of something like 2+=!!
     var numArr = [];
-    var opList = ['+', '-', 'x', '/'];
     var len = arr.length;
-    var sum = null;
-    //if a number, parse until an operator is received. convert to number. then consolidate array if multiple numbers
-    //if an operator, parse only that one.
-    //delete what was parsed from the array and return what was scraped
-    //so only a single value returned.
-    //check if it starts with an operator!
+    let i = 0;
+    //need to turn into an array if not
+    if (typeof arr === "string") {
+        arr = arr.split();
+    }
+    //EDGE CASE: need to handle edge case of something like 2+=!!
     if (opList.includes(arr[0])) { //if the expression starts with an operator
         alert('Error, cannot start expression with operator');
         //1 check for num, and keep going until you hit an operator
-    } else {  
-        for (let i = 0; i < len-1;) {
+    } else {
+        for (i; i < len-1;) { //for loop doesn't increment because array keeps getting shorter
             console.log(Number(arr[i]));//if (arr[i] != '=') { //not needed because it shouldn't pass the first if statement above
             if (Number(arr[i])) { //if the element is a number
                 numArr.push(Number(arr[i]));
@@ -131,19 +136,18 @@ function scrapeNums(arr) {
             } else if (opList.includes(arr[i])) { //it's an operator  (or equals?)
                 switch(arr[i]) {
                 case "+":
-                    arr.shift();
+                    arr.shift(); 
                     sum = add(numArr, arr); //arr passes the remainder of the array to operate on
-                    //return scrapeResult(sum, arr); //keep going until the = is reached
+                    return evaluate(sum, arr); //keep going until the = is reached
                 case "-":
                     arr.shift();
-                    i++;
-                    return sub(numArr, arr);
+                    sum = sub(numArr, arr);
                 case "x":
                     arr.shift();
-                    return mult(numArr, arr)
+                    sum = mult(numArr, arr)
                 case "/":
                     arr.shift();
-                    return div(numArr, arr);
+                    sum = div(numArr, arr);
                  //but need to call apropriate operation first
                 //arr[i] which operator it is
                 /*if add (pop from array) return add(numArr,)
@@ -151,14 +155,15 @@ function scrapeNums(arr) {
                 if mult return mult(numArr, )
                 if div return div(numArr, )*/
                 }
-            } else {
+            } else {  //character is an equals
+                console.log("I am here");
                     //the character is = and we're done
                     return sum;
                 }
             }
         }
     return sum;        //}
-    }
+}
 
 // Event Listeners per button //////////////////////////////
 
