@@ -120,7 +120,7 @@ function populateDisplay(e) {
     //////////////////////////////////
     operands.push(digitLabel);
     if (digitLabel === '=') {
-        var newDisplayText = evaluate(operands);
+        var newDisplayText = evaluate(sum, operands);
         //clear screen and put sum there
         display.textContent = '';
         display.textContent = newDisplayText;
@@ -132,11 +132,10 @@ function evaluate(sum, arr) {
     var numArr = [];
     var len = arr.length;
     let i = 0;
-    //need to turn into an array if not
-    if (typeof arr === "string") {
-        arr = arr.split();
-    }
+    
     //EDGE CASE: need to handle edge case of something like 2+=!!
+    //EDGE CASE: what if the expression starts with an operator?
+    //Is Clear button working?
     if (opList.includes(arr[0])) { //if the expression starts with an operator
         alert('Error, cannot start expression with operator');
         arr.length = 0;
