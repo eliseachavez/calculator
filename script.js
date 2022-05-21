@@ -5,7 +5,7 @@ var c = [];
 function add(a,b) {
     //array -> string -> number to do the math!
     
-    //1. Copy array b (c is the copy)
+    //1. Scrape the second operand from array b and discard the rest
      for (let i = 0; i < b.length; i++) {
         if (!opList.includes(b[i])) { //if its NOT an operator
             c.push(b[i]);
@@ -22,7 +22,7 @@ function add(a,b) {
             break;
         }
     }
-    //3. Now iterate through c so you're only adding the next number chunk, not any after that
+    /*//3. Now iterate through c so you're only adding the next number chunk, not any after that
     //we want ONLY what will be our second operand
     for (let i = 0; i < c.length; i++) {
         if (opList.includes(c[i])) { //if it IS an operator
@@ -30,7 +30,7 @@ function add(a,b) {
             //but then it needs to stop here, because we do want the rest of the array!
             break;
         }
-    }
+    }*/
     //turn the arrays into strings
     a = a.join("");
     c = c.join("");
