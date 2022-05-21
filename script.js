@@ -136,11 +136,10 @@ function evaluate(sum, arr) {
     //EDGE CASE: need to handle edge case of something like 2+=!!
     //EDGE CASE: what if the expression starts with an operator?
     //Is Clear button working?
-    if (opList.includes(arr[0])) { //if the expression starts with an operator
+    /*if (opList.includes(arr[0])) { //if the expression starts with an operator
         alert('Error, cannot start expression with operator');
         arr.length = 0;
-        //1 check for num, and keep going until you hit an operator
-    } else {
+        //1 check for num, and keep going until you hit an operator*/
         for (i; i < len-1;) { //for loop doesn't increment because array keeps getting shorter
             console.log(Number(arr[i]));//if (arr[i] != '=') { //not needed because it shouldn't pass the first if statement above
             if (Number(arr[i])) { //if the element is a number
@@ -174,7 +173,6 @@ function evaluate(sum, arr) {
                     return sum;
                 }
             }
-        }
     return sum;
 }
 
