@@ -1,15 +1,40 @@
 //MATH FUNCTIONS
 var a = 1;
 var b = 1;
-var c = null;
+var c = [];
 function add(a,b) {
     //array -> string -> number to do the math!
-    //pop off the equals from the remaining array
-    c = b.map((x) => x); //this copies the array "b" (gives it argument x and return argument x)
-    c.pop(); //don't want to modify the existing array; needs equals to know when expression is done
+    
+    //1. Copy array b (c is the copy)
+     for (let i = 0; i < b.length; i++) {
+        if (!opList.includes(b[i])) { //if its NOT an operator
+            c.push(b[i]);
+        } else {
+            break;
+        }
+    }
+    //2.Now for b, take off the second operand that will be added in this fxn
+    //we want the REST of the array
+    for (let i = 0; i < b.length; i++) {
+        if (!opList.includes(b[i])) { //if its NOT an operator
+            b.shift();   //then pop off numbers until you DO reach an operator
+        } else { //once operator encountered, stop removing
+            break;
+        }
+    }
+    //3. Now iterate through c so you're only adding the next number chunk, not any after that
+    //we want ONLY what will be our second operand
+    for (let i = 0; i < c.length; i++) {
+        if (opList.includes(c[i])) { //if it IS an operator
+            c.splice(0, i); //then need to delete from this index all the way to the end
+            //but then it needs to stop here, because we do want the rest of the array!
+            break;
+        }
+    }
+    //turn the arrays into strings
     a = a.join("");
     c = c.join("");
-    //now they need to be numbers!
+    //turn the strings into numbers
     a = Number(a);
     c = Number(c);
     return a + c;
@@ -123,6 +148,7 @@ function evaluate(arr) {
     //EDGE CASE: need to handle edge case of something like 2+=!!
     if (opList.includes(arr[0])) { //if the expression starts with an operator
         alert('Error, cannot start expression with operator');
+        arr.length = 0;
         //1 check for num, and keep going until you hit an operator
     } else {
         for (i; i < len-1;) { //for loop doesn't increment because array keeps getting shorter
