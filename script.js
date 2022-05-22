@@ -1,40 +1,20 @@
 //MATH FUNCTIONS
-var a = 1;
-var b = 1;
+var a = null;
+var b = null;
 var c = [];
 var operands = []; //takes every digit pressed as an input, e.g. [1,+,2, ]
 var opList = ['+','-','x','/'];
 var sum = null;
-function add(a,b) {
-    //array -> string -> number to do the math!
-    
-    //1. Scrape the second operand from array b and discard the rest
-     for (let i = 0; i < b.length; i++) {
-        if (!opList.includes(b[i])) { //if its NOT an operator
-            c.push(b[i]);
-        } else {
-            break;
-        }
-    }
-    //2.Now for b, take off the second operand that will be added in this fxn
-    //we want the REST of the array
-    console.log(b[0]);
-    for (let i = 0; i < b.length; i++) {
-        let isOperator = opList.includes(b[0]);
-        if (isOperator) {
-            break;
-        } else {
-            b.shift();   //then pop off numbers until you DO reach an operator
-        }
-    }
+var alternate = true;
+var newText = '';
+var isEdgeCase = false;
+var digitOperand = null;
+var isDigit = false;
+var digList = ["0","1","2","3","4","5","6","7","8","9"];
+var errorMessage = "Not a valid operation";
 
-    //turn the arrays into strings
-    a = a.join("");
-    c = c.join("");
-    //turn the strings into numbers
-    a = Number(a);
-    c = Number(c);
-    return a + c;
+function add(a,b) {
+    return a + b;
 }
 
 function sub(a,b) {
@@ -49,18 +29,6 @@ function div(a,b) {
     return a / b;
 }
 
-/*function operate(op, a,b) {
-// don't need input validation if user restricted to what's on the buttons
-    if ( op === '+') {
-        return add(a,b);
-    } else if ( op === '-') {
-        return sub(a,b);
-    } else if ( op === '*') {
-        return mult(a,b);
-    } else if ( op === '/') {
-        return div(a,b);
-    }
-}*/
 ///////////////////////////////
 
 /* 
@@ -112,70 +80,104 @@ var clearEquals = document.querySelector('.clearEquals');
 // Functions
 function populateDisplay(e) {
     //populate display with digit pressed
-    var currentDisplayText = display.textContent;
-    var digitLabel = e.currentTarget.outerText;
-    var textOnScreen = currentDisplayText + digitLabel;
+    let currentDisplayText = display.textContent;
+    digitLabel = e.currentTarget.outerText;
+    let textOnScreen = currentDisplayText + digitLabel;
     display.textContent = textOnScreen;
     displayDiv.appendChild(display);
     //////////////////////////////////
-    operands.push(digitLabel);
-    if (digitLabel === '=') {
-        var newDisplayText = evaluate(sum, operands);
-        //clear screen and put sum there
-        display.textContent = '';
-        display.textContent = newDisplayText;
-        displayDiv.appendChild(display);
+    //populate display with sum    n
+    newDisplayText = triage(digitLabel);
+    //clear screen and put sum there
+    display.textContent = '';
+    display.textContent = newDisplayText;
+    displayDiv.appendChild(display);
+}
+function isNum(element) {
+   return (Number(element) ? true : false); //automatically converts string numbers to numbers
+}
+function isOp(element) {
+    return (opList.includes(element) ? true : false);
+}
+function arrToString(arr) {
+    return arr.join('');
+}
+function strToArr(str) {
+    //8+57+14++=
+    //+8-32+14=
+    //8+-4=
+    let reg =  /[+-x\/]/;
+    str.replace('/[+-x/]]/', ',');
+    str.split(',');
+    str.pop();
+    return str.replace('/[+-x/]]/', ',').split(',').pop; //replace operators with one single character,
+    // the comma. the turn to array using comma as delimiter
+    //pop removes the =
+}
+function strToNum(str) {
+    return Number(str);
+}
+function triage(digitLabel) {
+    //check for digits first, because this would come before an edge case
+    //then numbers, because we need to store operands first
+    //only after we run out of digits/operands do we find the operation
+    switch(digitLabel) {
+        case isDigit(digitLabel):
+            if (op1 === null) {
+                op1 = strToNum(digitLabel);
+            } else {
+                op2 = strToNum(digitLabel);
+            }
+            break;
+        case isOp(digitLabel):
+            if (isAnEdgeCase(digitLabel)) {
+                return errorMessage;
+            } else {
+                return chooseOperation(digitLabel);
+            }
     }
 }
-
-function evaluate(sum, arr) {
-    var numArr = [];
-    var len = arr.length;
-    let i = 0;
-    
-    //EDGE CASE: need to handle edge case of something like 2+=!!
-    //EDGE CASE: what if the expression starts with an operator?
-    //Is Clear button working?
-    /*if (opList.includes(arr[0])) { //if the expression starts with an operator
-        alert('Error, cannot start expression with operator');
-        arr.length = 0;
-        //1 check for num, and keep going until you hit an operator*/
-        for (i; i < len-1;) { //for loop doesn't increment because array keeps getting shorter
-            console.log(Number(arr[i]));//if (arr[i] != '=') { //not needed because it shouldn't pass the first if statement above
-            if (Number(arr[i])) { //if the element is a number
-                numArr.push(Number(arr[i]));
-                arr.shift();
-            } else if (opList.includes(arr[i])) { //it's an operator  (or equals?)
-                switch(arr[i]) {
-                case "+":
-                    arr.shift(); 
-                    sum = add(numArr, arr); //arr passes the remainder of the array to operate on
-                    return evaluate(sum, arr); //keep going until the = is reached
-                case "-":
-                    arr.shift();
-                    sum = sub(numArr, arr);
-                case "x":
-                    arr.shift();
-                    sum = mult(numArr, arr)
-                case "/":
-                    arr.shift();
-                    sum = div(numArr, arr);
-                 //but need to call apropriate operation first
-                //arr[i] which operator it is
-                /*if add (pop from array) return add(numArr,)
-                if sub return sub(numArr,)
-                if mult return mult(numArr, )
-                if div return div(numArr, )*/
-                }
-            } else {  //character is an equals
-                console.log("I am here");
-                    //the character is = and we're done
-                    return sum;
-                }
-            }
-    return sum;
+function isOp {
+    return opList.includes(digitLabel);
 }
+function isAnEdgeCase(digitLabel) {
+    if (endsWithNum(digitLabel)) { //Ex: 2+=
+        return isEdgeCase;
+    } else if (startsWithOp(digitLabel)) { //Ex: +5=
+        return isEdgeCase;
+    } else if (operatorsAreClumped(digitLabel)) { //Ex: 5++2=
+        return isEdgeCase;
+    } else {
+        return false;
+    }
+    return isEdgeCase;
+}
+function endsWithNum(digitLabel) {
+    //how do you know you've reached the end?
+}
+function startsWithOp(digitLabel) {
 
+}
+function operatorsAreClumped(digitLabel) {
+
+}
+function isDigit(digitLabel){
+    return (digList.includes(digitLabel));
+}
+function chooseOperation(operator) {
+    switch (operator) {
+        case '+':
+            return add();
+        case '-':
+            return sub();
+        case 'x':
+            return mult();
+        case '/':
+            return div();
+        default:
+            alert(`This wasn't an operator, it was {digitLabel}`);
+        }
+}
 // Event Listeners per button //////////////////////////////
 
 digit1.addEventListener('click', populateDisplay);
