@@ -1,15 +1,14 @@
 //MATH FUNCTIONS
 var a = null;
 var b = null;
-var c = [];
-var operands = []; //takes every digit pressed as an input, e.g. [1,+,2, ]
+var op1 = null;
+var op2 = null;
 var opList = ['+','-','x','/'];
 var sum = null;
-var alternate = true;
 var newText = '';
 var isEdgeCase = false;
 var digitOperand = null;
-var isDigit = false;
+var isDigit = true;
 var digList = ["0","1","2","3","4","5","6","7","8","9"];
 var errorMessage = "Not a valid operation";
 
@@ -88,56 +87,48 @@ function populateDisplay(e) {
     //////////////////////////////////
     //populate display with sum    n
     newDisplayText = triage(digitLabel);
-    //clear screen and put sum there
+    //make clear screen here bc we don't want it to automaitaclly clear//clear screen and put sum there
     display.textContent = '';
     display.textContent = newDisplayText;
     displayDiv.appendChild(display);
 }
-function isNum(element) {
-   return (Number(element) ? true : false); //automatically converts string numbers to numbers
-}
 function isOp(element) {
     return (opList.includes(element) ? true : false);
 }
-function arrToString(arr) {
-    return arr.join('');
-}
-function strToArr(str) {
-    //8+57+14++=
-    //+8-32+14=
-    //8+-4=
-    let reg =  /[+-x\/]/;
-    str.replace('/[+-x/]]/', ',');
-    str.split(',');
-    str.pop();
-    return str.replace('/[+-x/]]/', ',').split(',').pop; //replace operators with one single character,
-    // the comma. the turn to array using comma as delimiter
-    //pop removes the =
-}
 function strToNum(str) {
     return Number(str);
+}
+function isItDigit(digitLabel) {
+    digit = strToNum(digitLabel);
+    if (digit) {
+        if (op1 === null) {
+                op1 = digit;
+            } else {
+                op2 = digit;
+        }
+        return isDigit;
+    } else {
+        return false;
+    }
 }
 function triage(digitLabel) {
     //check for digits first, because this would come before an edge case
     //then numbers, because we need to store operands first
     //only after we run out of digits/operands do we find the operation
-    switch(digitLabel) {
-        case isDigit(digitLabel):
-            if (op1 === null) {
-                op1 = strToNum(digitLabel);
-            } else {
-                op2 = strToNum(digitLabel);
-            }
-            break;
-        case isOp(digitLabel):
-            if (isAnEdgeCase(digitLabel)) {
-                return errorMessage;
-            } else {
-                return chooseOperation(digitLabel);
-            }
+    if (isItDigit(digitLabel)) {
+        return digitLabel;
+    } else if (isOp(digitLabel)) {
+        if (isAnEdgeCase(digitLabel)) {
+            return errorMessage;
+        } else {
+            sum = chooseOperation(digitLabel);
+            return sum;
+        }
+    } else {
+        return errorMessage;
     }
 }
-function isOp {
+function isOp(digitLabel) {
     return opList.includes(digitLabel);
 }
 function isAnEdgeCase(digitLabel) {
