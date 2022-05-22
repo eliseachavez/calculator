@@ -1,8 +1,7 @@
 //MATH FUNCTIONS
-var a = null;
-var b = null;
 var op1 = null;
 var op2 = null;
+var operator = null;
 var opList = ['+','-','x','/'];
 var sum = null;
 var newText = '';
@@ -118,16 +117,48 @@ function triage(digitLabel) {
     //then numbers, because we need to store operands first
     //only after we run out of digits/operands do we find the operation
     if (isItDigit(digitLabel)) {
-        return digitLabel;
+        if(areThereTwoOperands()&& (isThereAnOperator())) {
+            sum = chooseOperation(operator);
+            return sum;  
+        } else if (isThereOneOperator()){
+            op1 = strToNum(digitLabel);
+            return digitLabel;
+        } else {
+            return digitLabel;
+        }
     } else if (isOp(digitLabel)) {
+        operator = digitLabel;
         if (isAnEdgeCase(digitLabel)) {
             return errorMessage;
-        } else {
-            sum = chooseOperation(digitLabel);
+        } else if (areThereTwoOperands()) {//then check that there are two operators 
+            sum = chooseOperation(operator);
             return sum;
+        } else {
+            return digitLabel;
         }
     } else {
-        return errorMessage;
+        return digitLabel;
+    }
+}
+function isThereAnOperator () {
+    if (operator) {
+        return true;
+    } else {
+        return false;
+    }
+}
+function areThereTwoOperands() {
+    if ((op1) && (op2)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+function isThereOneOperator() {
+    if ((op1) && !(op2)) {
+        return true;
+    } else {
+        return false;
     }
 }
 function isOp(digitLabel) {
@@ -151,10 +182,10 @@ function endsWithNum(digitLabel) {
 }
 function startsWithOp(digitLabel) {
     //we know it's the beginning of the expression if sum is null.
-    if (( sum === null ) && (op1 == null) && (op2 === null)) {
+    /*if (( sum === null ) && (op1 == null) && (op2 === null)) {
         return errorMessage;
-    }
-    return digitLabel;
+    }*/
+    return false;
 }
 function operatorsAreClumped(digitLabel) {
     return false;
@@ -165,13 +196,13 @@ function isDigit(digitLabel){
 function chooseOperation(operator) {
     switch (operator) {
         case '+':
-            return add();
+            return add(op1,op2);
         case '-':
-            return sub();
+            return sub(op1,op2);
         case 'x':
-            return mult();
+            return mult(op1,op2);
         case '/':
-            return div();
+            return div(op1,op2);
         default:
             alert(`This wasn't an operator, it was {digitLabel}`);
         }
