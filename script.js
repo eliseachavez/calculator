@@ -88,9 +88,11 @@ function populateDisplay(e) {
     //populate display with sum    n
     newDisplayText = triage(digitLabel);
     //make clear screen here bc we don't want it to automaitaclly clear//clear screen and put sum there
-    display.textContent = '';
-    display.textContent = newDisplayText;
-    displayDiv.appendChild(display);
+    if (sum) {
+        display.textContent = '';
+        display.textContent = newDisplayText;
+        displayDiv.appendChild(display);
+    }
 }
 function isOp(element) {
     return (opList.includes(element) ? true : false);
@@ -145,12 +147,17 @@ function isAnEdgeCase(digitLabel) {
 }
 function endsWithNum(digitLabel) {
     //how do you know you've reached the end?
+    return false;
 }
 function startsWithOp(digitLabel) {
-
+    //we know it's the beginning of the expression if sum is null.
+    if (( sum === null ) && (op1 == null) && (op2 === null)) {
+        return errorMessage;
+    }
+    return digitLabel;
 }
 function operatorsAreClumped(digitLabel) {
-
+    return false;
 }
 function isDigit(digitLabel){
     return (digList.includes(digitLabel));
