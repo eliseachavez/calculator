@@ -91,6 +91,11 @@ function populateDisplay(e) {
         display.textContent = '';
         display.textContent = newDisplayText;
         displayDiv.appendChild(display);
+
+        //now clear variables/reset, so that expression can continue if wanted
+        op1 = sum;
+        op2 = null;
+        operater = null;
     }
 }
 function isOp(element) {
@@ -226,7 +231,7 @@ clearButton.addEventListener('click', () => {
     display.textContent = '';
     displayDiv.appendChild(display);
     //clear the relevant global variables
-    operands.length = 0; //clears array
-    sum = null;
+    /*operands.length = 0; //clears array
+    sum = null;*/
 });
 equalsButton.addEventListener('click', populateDisplay);
