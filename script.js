@@ -83,7 +83,18 @@ function populateDisplay(e) {
     let textOnScreen = currentDisplayText + digitLabel;
     display.textContent = textOnScreen;
     displayDiv.appendChild(display);
-    //////////////////////////////////
+    //call clear?
+}
+function getSum(e) {
+    //populate display with digit pressed
+    populateDisplay(e);
+    //////////////
+    //don't evaluate, that's the job of equals
+    //case: only use this when 
+    if ((op1))
+    if ((op1)&&(op2)&&(operator)) {
+        newDisplayText = sum;
+    }
     //populate display with sum    n
     newDisplayText = triage(digitLabel);
     //make clear screen here bc we don't want it to automaitaclly clear//clear screen and put sum there
@@ -121,18 +132,57 @@ function triage(digitLabel) {
     //check for digits first, because this would come before an edge case
     //then numbers, because we need to store operands first
     //only after we run out of digits/operands do we find the operation
+    //Kenny: change the sequence. Check variable by variable
+    //e.g., check if op1 is full. if it's a digit, add to op1. is it not 
     if (isItDigit(digitLabel)) {
-        if(areThereTwoOperands()&& (isThereAnOperator())) {
+        /*
+        All variables are empty. Clear sum from any history of past operations. Op1 = num and return digitLabel
+        Op1 is completely empty. Op1 = num/ return digitLabel
+        Op1 has a value but there is no operator. op1 += num /return digitLabel
+        There is an op1 and an operator. Assign to op2 op2 = num / return digitLabel
+        All variables full. Add to op2. Op2+= num/ return digitLabel
+        */if (allVariablesEmpty()) {
+            op1 = Number(digitLabel);
+            return digitLabel;
+        } else if((op1) && (!operator)) {
+            op1+= Number(digitLabel);
+            return digitLabel;
+        } else if ((op1) && (operator)) {
+            op2 = Number(digitLabel);
+            return digitLabel;
+        } else if (allVariablesFilled()) {
+            op2+= Number(digitLabel);
+            return digitLabel;
+        } else {
+            return errorMessage;
+        }
+
+
+
+
+
+
+        /*if(areThereTwoOperands()&& (isThereAnOperator())) {
             sum = chooseOperation(operator);
             return sum;  
         } else if (isThereOneOperator()){
-            op1 = strToNum(digitLabel);
+            op2 = strToNum(digitLabel);
             return digitLabel;
-        } else {
+        } else //is operator one, but is there already a number there?{
+            if (op1) { //it already exists but we need to agglutinate it
+                let strOperand = numToStr(digitLabel);
+                strOperand+= strOperand;
+                digitLabel = strToNum(strOperand);
+            }
+            else {
+                op1 = digitLabel;
+            }
             return digitLabel;
-        }
+        }*/
     } else if (isOp(digitLabel)) {
-        operator = digitLabel;
+
+
+        /*operator = digitLabel;
         if (isAnEdgeCase(digitLabel)) {
             return errorMessage;
         } else if (areThereTwoOperands()) {//then check that there are two operators 
@@ -140,9 +190,23 @@ function triage(digitLabel) {
             return sum;
         } else {
             return digitLabel;
-        }
+        }*/
+    } else { //is equals
+        
+    }
+}
+function allVariablesEmpty() {
+    if ((!op) && (!op2) && (!op3)) {
+        return true;
     } else {
-        return digitLabel;
+        return false;
+    }
+}
+function allVariablesFilled() {
+    if ((op) && (op2) && (op3)) {
+        return true;
+    } else {
+        return false;
     }
 }
 function isThereAnOperator () {
@@ -170,6 +234,7 @@ function isOp(digitLabel) {
     return opList.includes(digitLabel);
 }
 function isAnEdgeCase(digitLabel) {
+    //and two add, needs to be preceded by an operator
     if (endsWithNum(digitLabel)) { //Ex: 2+=
         return isEdgeCase;
     } else if (startsWithOp(digitLabel)) { //Ex: +5=
@@ -230,8 +295,8 @@ divButton.addEventListener('click', populateDisplay);
 clearButton.addEventListener('click', () => {
     display.textContent = '';
     displayDiv.appendChild(display);
-    //clear the relevant global variables
-    /*operands.length = 0; //clears array
-    sum = null;*/
+    op1 = null;
+    op2 = null;
+    operater = null;
 });
-equalsButton.addEventListener('click', populateDisplay);
+equalsButton.addEventListener('click', getSum);
