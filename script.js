@@ -164,12 +164,10 @@ function triage(digitLabel) {
         }
     } else if (isOp(digitLabel)) {  
         if (allVariablesFilled()) {
-            return chooseOperation(); //means a calculation has taken place?
-        } else if (((op1) && (!op2) && (!operator))){
+            return errorMessage; //only pressing = will do a calculation
+        } else {
             operator = digitLabel;
             return digitLabel;
-        } else {
-            return errorMessage;
         }
     } else { //is equals
         if (allVariablesFilled()) {
