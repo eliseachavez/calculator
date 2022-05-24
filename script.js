@@ -1,6 +1,6 @@
 //MATH FUNCTIONS
-var op1 = null;
-var op2 = null;
+var op1 = [];
+var op2 = [];
 var operator = null;
 var opList = ['+','-','x','/'];
 var sum = null;
@@ -162,8 +162,8 @@ function triage(digitLabel) {
         } else {
             return errorMessage;
         }
-    } else if (isOp(digitLabel)) {  
-        if (allVariablesFilled()) {
+    } else if (isOp(digitLabel)) {
+        if (allVariablesFilled() || allVariablesEmpty()) {
             return errorMessage; //only pressing = will do a calculation
         } else {
             operator = digitLabel;
