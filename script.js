@@ -1,3 +1,11 @@
+//TO DOs and EDGE CASES
+/* 
+8+3-4		normal
+5/0		can’t divide by zero
+23+5+4	tens place+ digits
+23++4		double operators
++5-4		starts with operator
+*/
 //MATH FUNCTIONS
 var op1 = [];
 var op2 = [];
