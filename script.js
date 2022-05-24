@@ -11,20 +11,32 @@ var isDigit = true;
 var digList = ["0","1","2","3","4","5","6","7","8","9"];
 var errorMessage = "Not a valid operation";
 
-function add(a,b) {
-    return a + b;
+function add() {
+    sum = op1 + op2;
+    op1 = sum;
+    clear(); //the soft clear that preserves op1 for more operations , and sum
+    return op1;
 }
 
-function sub(a,b) {
-    return a - b;
+function sub() {
+    sum = op1 - op2;
+    op1 = sum;
+    clear(); //the soft clear that preserves op1 for more operations
+    return op1;
 }
 
-function mult(a,b) {
-    return a * b;
+function mult() {
+    sum = op1 * op2;
+    op1 = sum;
+    clear(); //the soft clear that preserves op1 for more operations
+    return op1;
 }
 
-function div(a,b) {
-    return a / b;
+function div() {
+    sum = op1 / op2;
+    op1 = sum;
+    clear(); //the soft clear that preserves op1 for more operations
+    return op1;
 }
 
 ///////////////////////////////
@@ -76,6 +88,20 @@ var clearEquals = document.querySelector('.clearEquals');
 ////////////////////////////////////////////////////////////
 
 // Functions
+function clear() {
+    //the SOFT clear: op1 is preserved so we can stack operations
+    //we also keep the current operator, bc it hasnt been used yet
+    op2 = null;
+    sum = null;
+    newText = '';
+    isEdgeCase = false;
+    digitOperand = null;
+    isDigit = true;
+}
+function numToStr(a) {
+    a = a.toString;
+    return a;
+}
 function populateDisplay(e) {
     //populate display with digit pressed
     let currentDisplayText = display.textContent;
@@ -83,31 +109,22 @@ function populateDisplay(e) {
     let textOnScreen = currentDisplayText + digitLabel;
     display.textContent = textOnScreen;
     displayDiv.appendChild(display);
-    //call clear?
-}
-function getSum(e) {
-    //populate display with digit pressed
-    populateDisplay(e);
-    //////////////
-    //don't evaluate, that's the job of equals
-    //case: only use this when 
-    if ((op1))
-    if ((op1)&&(op2)&&(operator)) {
-        newDisplayText = sum;
-    }
-    //populate display with sum    n
-    newDisplayText = triage(digitLabel);
-    //make clear screen here bc we don't want it to automaitaclly clear//clear screen and put sum there
-    if (sum) {
-        display.textContent = '';
-        display.textContent = newDisplayText;
-        displayDiv.appendChild(display);
 
-        //now clear variables/reset, so that expression can continue if wanted
-        op1 = sum;
-        op2 = null;
-        operater = null;
+    if (digitLabel === "=") {
+        //clear screen
+        display.textContent = "";
+        displayDiv.appendChild(display);
+        //then fetch and disply sum
+        digitLabel = triage(digitLabel);
+        display.textContent = digitLabel;
+        displayDiv.appendChild(display);
+    } else { //we keep what's on the screen
+        digitLabel = triage(digitLabel);
+        display.textContent = currentDisplayText + digitLabel;
+        displayDiv.appendChild(display);
     }
+    
+    
 }
 function isOp(element) {
     return (opList.includes(element) ? true : false);
@@ -118,11 +135,6 @@ function strToNum(str) {
 function isItDigit(digitLabel) {
     digit = strToNum(digitLabel);
     if (digit) {
-        if (op1 === null) {
-                op1 = digit;
-            } else {
-                op2 = digit;
-        }
         return isDigit;
     } else {
         return false;
@@ -135,13 +147,7 @@ function triage(digitLabel) {
     //Kenny: change the sequence. Check variable by variable
     //e.g., check if op1 is full. if it's a digit, add to op1. is it not 
     if (isItDigit(digitLabel)) {
-        /*
-        All variables are empty. Clear sum from any history of past operations. Op1 = num and return digitLabel
-        Op1 is completely empty. Op1 = num/ return digitLabel
-        Op1 has a value but there is no operator. op1 += num /return digitLabel
-        There is an op1 and an operator. Assign to op2 op2 = num / return digitLabel
-        All variables full. Add to op2. Op2+= num/ return digitLabel
-        */if (allVariablesEmpty()) {
+        if (allVariablesEmpty()) {
             op1 = Number(digitLabel);
             return digitLabel;
         } else if((op1) && (!operator)) {
@@ -156,54 +162,31 @@ function triage(digitLabel) {
         } else {
             return errorMessage;
         }
-
-
-
-
-
-
-        /*if(areThereTwoOperands()&& (isThereAnOperator())) {
-            sum = chooseOperation(operator);
-            return sum;  
-        } else if (isThereOneOperator()){
-            op2 = strToNum(digitLabel);
+    } else if (isOp(digitLabel)) {  
+        if (allVariablesFilled()) {
+            return chooseOperation(); //means a calculation has taken place?
+        } else if (((op1) && (!op2) && (!operator))){
+            operator = digitLabel;
             return digitLabel;
-        } else //is operator one, but is there already a number there?{
-            if (op1) { //it already exists but we need to agglutinate it
-                let strOperand = numToStr(digitLabel);
-                strOperand+= strOperand;
-                digitLabel = strToNum(strOperand);
-            }
-            else {
-                op1 = digitLabel;
-            }
-            return digitLabel;
-        }*/
-    } else if (isOp(digitLabel)) {
-
-
-        /*operator = digitLabel;
-        if (isAnEdgeCase(digitLabel)) {
-            return errorMessage;
-        } else if (areThereTwoOperands()) {//then check that there are two operators 
-            sum = chooseOperation(operator);
-            return sum;
         } else {
-            return digitLabel;
-        }*/
+            return errorMessage;
+        }
     } else { //is equals
-        
+        if (allVariablesFilled()) {
+            //clear the display to make room for the sum
+            return chooseOperation();
+            }
     }
 }
 function allVariablesEmpty() {
-    if ((!op) && (!op2) && (!op3)) {
+    if ((!op1) && (!op2) && (!operator)) {
         return true;
     } else {
         return false;
     }
 }
 function allVariablesFilled() {
-    if ((op) && (op2) && (op3)) {
+    if ((op1) && (op2) && (operator)) {
         return true;
     } else {
         return false;
@@ -263,16 +246,16 @@ function operatorsAreClumped(digitLabel) {
 function isDigit(digitLabel){
     return (digList.includes(digitLabel));
 }
-function chooseOperation(operator) {
+function chooseOperation() {
     switch (operator) {
         case '+':
-            return add(op1,op2);
+            return add();
         case '-':
-            return sub(op1,op2);
+            return sub();
         case 'x':
-            return mult(op1,op2);
+            return mult();
         case '/':
-            return div(op1,op2);
+            return div();
         default:
             alert(`This wasn't an operator, it was {digitLabel}`);
         }
@@ -292,11 +275,23 @@ addButton.addEventListener('click', populateDisplay);
 subButton.addEventListener('click', populateDisplay);
 multButton.addEventListener('click', populateDisplay);
 divButton.addEventListener('click', populateDisplay);
-clearButton.addEventListener('click', () => {
-    display.textContent = '';
-    displayDiv.appendChild(display);
+clearButton.addEventListener('click', (e) => {
+    //the HARD clear: op1 is wiped as well
     op1 = null;
     op2 = null;
-    operater = null;
+    operator = null;
+    opList = ['+','-','x','/'];
+    sum = null;
+    newText = '';
+    isEdgeCase = false;
+    digitOperand = null;
+    isDigit = true;
+
+    //now clear screen
+    let currentDisplayText = display.textContent;
+    digitLabel = e.currentTarget.outerText;
+    let textOnScreen = '';
+    display.textContent = textOnScreen;
+    displayDiv.appendChild(display);
 });
-equalsButton.addEventListener('click', getSum);
+equalsButton.addEventListener('click', populateDisplay);
