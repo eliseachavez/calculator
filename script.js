@@ -154,16 +154,16 @@ function triage(digitLabel) {
         if (allVariablesEmpty()) {
             op1 = Number(digitLabel);
             return digitLabel;
-        } else if((op1) && (!operator)) {
+        } else if((op1) && (!operator)) { //add to op1
             let op1str = op1.toString(); 
             op1 = op1str + digitLabel;
             op1 = Number(op1);
             //op1+= Number(digitLabel);
             return digitLabel;
-        } else if ((op1) && (operator)) {
+        } else if ((op1) && (operator) && (!op2)) { //only op2 doesn't exist, so fill it
             op2 = Number(digitLabel);
             return digitLabel;
-        } else if (allVariablesFilled()) {
+        } else if (allVariablesFilled()) { //add to op2
             let op2str = op2.toString(); 
             op2 = op2str + digitLabel;
             op2 = Number(op2);
@@ -172,7 +172,10 @@ function triage(digitLabel) {
             return errorMessage;
         }
     } else if (isOp(digitLabel)) {
-        if (allVariablesFilled() || allVariablesEmpty()) {
+        if (operator) { //we already have operator, this is the edge case 5++3
+            return errorMessage;
+        }
+        else if (allVariablesFilled() || allVariablesEmpty()) { //can't start OR end an expression with an operator
             return errorMessage; //only pressing = will do a calculation
         } else {
             operator = digitLabel;
