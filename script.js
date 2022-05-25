@@ -13,7 +13,7 @@ var operator = null;
 var opList = ['+','-','x','/'];
 var sum = null;
 var newText = '';
-var isEdgeCase = false;
+var digit = null;
 var digitOperand = null;
 var isDigit = true;
 var digList = ["0","1","2","3","4","5","6","7","8","9"];
@@ -41,6 +41,9 @@ function mult() {
 }
 
 function div() {
+    if (op2 === 0) {
+        return "Can't divide by zero";
+    }
     sum = op1 / op2;
     op1 = sum;
     clear(); //the soft clear that preserves op1 for more operations
@@ -62,6 +65,7 @@ maybe start with the event listener as something really simple, like an alert me
 // The buttons - could also grab as a button nodelist?
 var buttonList = document.querySelectorAll('button'); //nodelist of all buttons
 
+var digit0 = document.querySelector('#digit0');
 var digit1 = document.querySelector('#digit1');
 var digit2 = document.querySelector('#digit2');
 var digit3 = document.querySelector('#digit3');
@@ -103,9 +107,9 @@ function clear() {
     operator = null;
     sum = null;
     newText = '';
-    isEdgeCase = false;
     digitOperand = null;
     isDigit = true;
+    digit = null;
 }
 function populateDisplay(e) {
     //populate display with digit pressed
@@ -139,9 +143,11 @@ function strToNum(str) {
 }
 function isItDigit(digitLabel) {
     digit = strToNum(digitLabel);
-    if (digit) {
+    if (validVar(digit)) {
+        digit = null;
         return isDigit;
     } else {
+        digit = null;
         return false;
     }
 }
@@ -155,13 +161,13 @@ function triage(digitLabel) {
         if (allVariablesEmpty()) {
             op1 = Number(digitLabel);
             return digitLabel;
-        } else if((op1) && (!operator)) { //add to op1
+        } else if((validVar(op1)) && (!operator)) { //add to op1
             let op1str = op1.toString(); 
             op1 = op1str + digitLabel;
             op1 = Number(op1);
             //op1+= Number(digitLabel);
             return digitLabel;
-        } else if ((op1) && (operator) && (!op2)) { //only op2 doesn't exist, so fill it
+        } else if ((validVar(op1)) && (operator) && (!validVar(op2))) { //only op2 doesn't exist, so fill it
             op2 = Number(digitLabel);
             return digitLabel;
         } else if (allVariablesFilled()) { //add to op2
@@ -190,14 +196,14 @@ function triage(digitLabel) {
     }
 }
 function allVariablesEmpty() {
-    if ((!op1) && (!op2) && (!operator)) {
+    if ((!(validVar(op1))) && (!validVar(op2)) && (!operator)) {
         return true;
     } else {
         return false;
     }
 }
 function allVariablesFilled() {
-    if ((op1) && (op2) && (operator)) {
+    if ((validVar(op1)) && (validVar(op2)) && (operator)) {
         return true;
     } else {
         return false;
@@ -211,14 +217,14 @@ function isThereAnOperator () {
     }
 }
 function areThereTwoOperands() {
-    if ((op1) && (op2)) {
+    if ((validVar(op1)) && (validVar(op2))) {
         return true;
     } else {
         return false;
     }
 }
 function isThereOneOperator() {
-    if ((op1) && !(op2)) {
+    if ((validVar(op1)) && !(validVar(op2))) {
         return true;
     } else {
         return false;
@@ -226,19 +232,6 @@ function isThereOneOperator() {
 }
 function isOp(digitLabel) {
     return opList.includes(digitLabel);
-}
-function isAnEdgeCase(digitLabel) {
-    //and two add, needs to be preceded by an operator
-    if (endsWithNum(digitLabel)) { //Ex: 2+=
-        return isEdgeCase;
-    } else if (startsWithOp(digitLabel)) { //Ex: +5=
-        return isEdgeCase;
-    } else if (operatorsAreClumped(digitLabel)) { //Ex: 5++2=
-        return isEdgeCase;
-    } else {
-        return false;
-    }
-    return isEdgeCase;
 }
 function endsWithNum(digitLabel) {
     //how do you know you've reached the end?
@@ -271,8 +264,17 @@ function chooseOperation() {
             alert(`This wasn't an operator, it was {digitLabel}`);
         }
 }
+function validVar(a) {
+    //basically, is var 0 or greater (not null)
+    if ( ( a === null ) || ( isNaN(a) )) {
+      return false;  
+    } else {
+        return true;
+    }
+}
 // Event Listeners per button //////////////////////////////
 
+digit0.addEventListener('click', populateDisplay);    
 digit1.addEventListener('click', populateDisplay);
 digit2.addEventListener('click', populateDisplay);
 digit3.addEventListener('click', populateDisplay);
@@ -294,9 +296,9 @@ clearButton.addEventListener('click', (e) => {
     opList = ['+','-','x','/'];
     sum = null;
     newText = '';
-    isEdgeCase = false;
     digitOperand = null;
     isDigit = true;
+    digit = null;
 
     //now clear screen
     let currentDisplayText = display.textContent;
