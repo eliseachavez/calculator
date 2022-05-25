@@ -100,6 +100,7 @@ function clear() {
     //the SOFT clear: op1 is preserved so we can stack operations
     //we also keep the current operator, bc it hasnt been used yet
     op2 = null;
+    operator = null;
     sum = null;
     newText = '';
     isEdgeCase = false;
