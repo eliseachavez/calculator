@@ -62,21 +62,12 @@
     margin:1px;
     padding: 3px;
 }
-.digRow3 {
-    display:flex;
-    flex: 1;
-    background-color: #6a40f5;
-    flex-direction: row;
-    justify-content: space-around;
-    margin:1px;
-    padding: 3px;
-}
 
 .operatorGroup {
     display: flex;
     flex: 2;
     background-color: #6a40f5;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: space-around;
     margin: 1px;
     padding: 3px;
@@ -96,26 +87,6 @@
     padding: 3px;
     /*width: 14vw;
     height: 14vh;*/
-}
-
-
-.opRow1 {
-    display: flex;
-    flex: 1;
-    background-color: #6a40f5;
-    flex-direction: row;
-    justify-content: space-around;
-    margin: 1px;
-    padding: 3px;
-} 
-.opRow2 {
-    display: flex;
-    flex: 1;
-    background-color: #6a40f5;
-    flex-direction: row;
-    justify-content: space-around;
-    margin: 1px;
-    padding: 3px;
 }
 
 /*children at very bottom of hierarchy 
