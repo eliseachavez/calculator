@@ -7,8 +7,8 @@
 +5-4		starts with operator
 */
 //MATH FUNCTIONS
-var op1 = [];
-var op2 = [];
+var op1 = null;
+var op2 = null;
 var operator = null;
 var opList = ['+','-','x','/'];
 var sum = null;
@@ -106,10 +106,6 @@ function clear() {
     digitOperand = null;
     isDigit = true;
 }
-function numToStr(a) {
-    a = a.toString;
-    return a;
-}
 function populateDisplay(e) {
     //populate display with digit pressed
     let currentDisplayText = display.textContent;
@@ -159,13 +155,18 @@ function triage(digitLabel) {
             op1 = Number(digitLabel);
             return digitLabel;
         } else if((op1) && (!operator)) {
-            op1+= Number(digitLabel);
+            let op1str = op1.toString(); 
+            op1 = op1str + digitLabel;
+            op1 = Number(op1);
+            //op1+= Number(digitLabel);
             return digitLabel;
         } else if ((op1) && (operator)) {
             op2 = Number(digitLabel);
             return digitLabel;
         } else if (allVariablesFilled()) {
-            op2+= Number(digitLabel);
+            let op2str = op2.toString(); 
+            op2 = op2str + digitLabel;
+            op2 = Number(op2);
             return digitLabel;
         } else {
             return errorMessage;
